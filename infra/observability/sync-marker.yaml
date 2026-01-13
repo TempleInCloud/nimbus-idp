@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: observability-sync-marker
+  namespace: observability
+data:
+  note: "trigger argocd sync"
