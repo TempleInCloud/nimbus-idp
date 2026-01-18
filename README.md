@@ -42,6 +42,21 @@ Core components:
 ---
 ## Architecture
 
+Nimbus follows a GitOps-driven platform architecture built on Kubernetes.
+
+📐 **Nimbus architecture diagram:**  
+👉 [View Nimbus Architecture](docs/architecture.md)
+
+This diagram shows how:
+- Developers push code to GitHub
+- CI pipelines build and update manifests
+- Argo CD synchronizes desired state to Kubernetes
+- Applications and observability run on the cluster
+- The Nimbus Service Catalog provides a single discovery layer
+
+---
+## Architecture
+
 Nimbus is built as a lightweight Internal Developer Platform using a layered architecture.
 
 **Layers:**
