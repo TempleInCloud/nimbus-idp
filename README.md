@@ -107,6 +107,8 @@ monitoring cluster health.
 ---
 ## Service Catalog
 
+![image alt](https://github.com/TempleInCloud/nimbus-idp/tree/910add2cdc0119961d95243f58096918aec14144/docs/images)
+
 Nimbus includes a lightweight **Service Catalog** that provides a single place to discover services running on the platform.
 
 The catalog is:
