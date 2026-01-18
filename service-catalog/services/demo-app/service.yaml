@@ -1,0 +1,28 @@
+apiVersion: nimbus.io/v1alpha1
+kind: Service
+metadata:
+  name: demo-app
+  owner: platform-team
+  tier: "3"
+spec:
+  description: "Demo app deployed via Argo CD on the Nimbus IDP cluster."
+  lifecycle: production
+  system: nimbus
+  links:
+    - name: Argo CD App
+      url: "http://localhost:8080/applications/argocd/demo-app"
+    - name: Grafana
+      url: "http://localhost:3000"
+    - name: Prometheus
+      url: "http://localhost:9090"
+  git:
+    repo: "https://github.com/TempleInCloud/nimbus-idp"
+    path: "apps/demo-app"
+  kubernetes:
+    namespace: default
+    workloads:
+      - kind: Deployment
+        name: demo-app
+    services:
+      - name: demo-app
+        port: 80
