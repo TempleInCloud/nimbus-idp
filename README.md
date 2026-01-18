@@ -48,6 +48,7 @@ Git remains the single source of truth.
 ---
 
 ## Nimbus Service Catalog:
+![image alt](https://github.com/TempleInCloud/nimbus-idp/blob/b52c2c8de9112c80eaf187bdc4b5186b9f54e928/docs/images/service-catalog.png)
 Nimbus includes a lightweight, Git-backed Service Catalog that provides a single place to discover services running on the platform. The catalog is read-only for developers and focused on visibility rather than provisioning.
 
 Service definitions are stored in Git at:
