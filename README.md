@@ -37,7 +37,31 @@ Core components:
 - Prometheus for metrics collection
 - Grafana for dashboards and visualization
 - GitHub Actions for CI
-- NGINX Ingress for traffic routing
+- Traefik Ingress for traffic routing
+
+---
+## Architecture
+
+Nimbus is built as a lightweight Internal Developer Platform using a layered architecture.
+
+**Layers:**
+
+- **Infrastructure Layer**
+  - AWS EC2 hosts the Kubernetes (k3s) cluster.
+  - This layer is abstracted away from application developers.
+
+- **Platform Layer**
+  - Kubernetes provides the execution environment.
+  - Argo CD acts as the GitOps control plane, syncing desired state from Git.
+  - Traefik handles ingress traffic into the cluster.
+
+- **Observability Layer**
+  - Prometheus collects metrics from nodes and Kubernetes components.
+  - Grafana visualizes metrics through predefined dashboards.
+
+- **Service Catalog**
+  - Service metadata is stored in Git under `service-catalog/`.
+  - Each service entry defines ownership, lifecycle, Git source, Kubernetes resources, and operational links.
 
 ---
 
