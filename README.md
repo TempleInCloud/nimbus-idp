@@ -94,6 +94,20 @@ Nimbus is not:
 
 ---
 
+## Demo App Deployment (Validation)
+
+- Deployed `demo-app` using **Argo CD** following GitOps principles
+- Kubernetes **Service** created to expose the application internally
+- Application reachability validated using `kubectl port-forward`
+- Successfully accessed the running application via browser (nginx welcome page)
+
+This confirms:
+- Argo CD is syncing application manifests correctly
+- Kubernetes networking (Service → Pod) is working as expected
+- The platform can deploy and expose workloads reliably
+
+---
+
 ## Future Improvements
 
 - Service catalog
