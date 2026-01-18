@@ -132,12 +132,15 @@ GitHub (manifests) → Argo CD (sync) → Kubernetes (Deploy/Service/Ingress) �
 
 ---
 
-## Status
+## Screenshots
 
-Nimbus is a portfolio and learning project demonstrating
-platform engineering, GitOps workflows, Kubernetes operations,
-and observability fundamentals.
+Screenshots are stored in `docs/screenshots/`.
 
+- Argo CD Applications (Synced/Healthy)
+- demo-app Argo CD resource graph (Ingress → Service → Pods)
+- Grafana dashboards (Node + Kubernetes/Pod networking)
+- Prometheus targets (exporters UP)
+- demo-app working in browser (nginx page)
 ---
 
 ## Author
