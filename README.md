@@ -47,21 +47,6 @@ Git remains the single source of truth.
 
 ---
 
-## Repository structure:
-.
-├── apps/                          # Application manifests (GitOps)
-│   └── demo-app/
-├── observability/                 # Prometheus & Grafana stack
-├── service-catalog/
-│   ├── index.html                 # Lightweight catalog UI
-│   └── services/
-│       └── <service-name>/
-│           └── service.yaml       # Service metadata (source of truth)
-├── images/                        # Screenshots for documentation
-└── README.md
-
----
-
 ## Nimbus Service Catalog:
 Nimbus includes a lightweight, Git-backed Service Catalog that provides a single place to discover services running on the platform. The catalog is read-only for developers and focused on visibility rather than provisioning.
 
