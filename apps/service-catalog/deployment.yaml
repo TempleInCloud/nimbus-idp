@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-catalog
+  labels:
+    app: service-catalog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: service-catalog
+  template:
+    metadata:
+      labels:
+        app: service-catalog
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:alpine
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: catalog-content
+          mountPath: /usr/share/nginx/html
+      volumes:
+      - name: catalog-content
+        configMap:
+          name: service-catalog-html
