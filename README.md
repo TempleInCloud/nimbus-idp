@@ -1,6 +1,6 @@
 ## Nimbus IDP — Internal Developer Platform
 
-Nimbus is a portfolio and learning Internal Developer Platform (IDP) built to demonstrate real-world Platform Engineering practices using Kubernetes, GitOps, and observability tooling. The goal of Nimbus is clarity, visibility, and correct platform boundaries — not abstraction-heavy magic.
+Nimbus is a Kubernetes-first Internal Developer Platform that uses GitOps for delivery, Prometheus and Grafana for observability, and a Git-backed service catalog for visibility and ownership.
 
 Nimbus connects existing best-in-class tools into a single, opinionated platform workflow.
 
