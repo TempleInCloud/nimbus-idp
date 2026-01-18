@@ -105,19 +105,32 @@ Grafana dashboards offer a Node Resource Overview for
 monitoring cluster health.
 
 ---
+## Service Catalog
 
-## What Nimbus Is (and Is Not)
+Nimbus includes a lightweight **Service Catalog** that provides a single place to discover services running on the platform.
 
-Nimbus is:
-- A lightweight Internal Developer Platform
-- A GitOps-driven deployment system
-- A foundation for platform engineering practices
+The catalog is:
+- **Git-backed** (YAML as the source of truth)
+- **Auto-updated via GitOps**
+- **Read-only for developers**
+- **Focused on visibility, not provisioning**
 
-Nimbus is not:
-- A full developer portal UI
-- A managed PaaS
-- A replacement for Kubernetes knowledge
+Each service entry describes:
+- Ownership and lifecycle
+- Kubernetes namespace and workloads
+- Links to Argo CD, Grafana, and Prometheus
+- Where the service is defined in Git
 
+### Example Services
+- `demo-app` – sample application deployed via Argo CD
+- `observability-stack` – Prometheus and Grafana used by the platform
+
+### How it works
+1. Services are defined in Git under `service-catalog/services/*/service.yaml`
+2. A simple static UI renders these definitions
+3. Links point directly to live platform tools (Argo CD, Grafana, Prometheus)
+
+The Service Catalog acts as a **discovery layer** on top of Kubernetes and GitOps.
 ---
 
 ## Tech Stack (v1)
@@ -163,7 +176,6 @@ GitHub (manifests) → Argo CD (sync) → Kubernetes (Deploy/Service/Ingress) �
 
 ## Future Improvements
 
-- Service catalog
 - Application templates
 - Environment promotion workflows
 - Alerting and SLOs
