@@ -40,7 +40,7 @@ Core components:
 - Traefik Ingress for traffic routing
 
 ---
-## Architecture
+## Nimbus Architecture
 
 Nimbus follows a GitOps-driven platform architecture built on Kubernetes.
 
