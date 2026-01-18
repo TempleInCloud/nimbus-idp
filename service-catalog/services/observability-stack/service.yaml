@@ -1,0 +1,22 @@
+apiVersion: nimbus.io/v1alpha1
+kind: Service
+metadata:
+  name: observability-stack
+  owner: platform-team
+  tier: "1"
+spec:
+  description: "Observability stack for Nimbus: Prometheus + Grafana (and exporters)."
+  lifecycle: production
+  system: nimbus
+  links:
+    - name: Grafana
+      url: "http://localhost:3000"
+    - name: Prometheus
+      url: "http://localhost:9090"
+  kubernetes:
+    namespace: observability
+    services:
+      - name: prometheus-kube-prometheus-prometheus
+        port: 9090
+      - name: prometheus-grafana
+        port: 80
