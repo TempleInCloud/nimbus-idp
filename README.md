@@ -65,6 +65,7 @@ Nimbus does not introduce custom dashboards. Existing platform tools are the int
 Argo CD acts as the GitOps control plane and is used to inspect application health, resource trees, sync status, and rollback history.
 
 ## Grafana:
+![image alt](https://github.com/TempleInCloud/nimbus-idp/blob/5c86a9d7d1d57af12694794fe58778b17842d58c/docs/images/Grafana-node%20resource%20overview.png)
 Grafana provides observability into node resources, Kubernetes workloads, and networking metrics using Prometheus as a data source.
 
 ## Prometheus:
