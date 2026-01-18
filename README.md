@@ -61,6 +61,7 @@ Each service definition captures ownership, lifecycle, namespace, repository, an
 Nimbus does not introduce custom dashboards. Existing platform tools are the interface.
 
 ## Argo CD:
+![image alt](https://github.com/TempleInCloud/nimbus-idp/blob/b4cde672ab3ba6583c55edccc48f9734a728f18f/docs/images/argocd-applications.png)
 Argo CD acts as the GitOps control plane and is used to inspect application health, resource trees, sync status, and rollback history.
 
 ## Grafana:
