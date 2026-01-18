@@ -1,14 +1,11 @@
-# Nimbus Architecture
-
-```mermaid
 flowchart TD
     Dev[Developer] --> Git[GitHub Repo]
 
-    Git --> CI[GitHub Actions<br/>(CI)]
+    Git --> CI[GitHub Actions (CI)]
     CI --> Git
 
-    Git --> Argo[Argo CD<br/>(GitOps)]
-    Argo --> K8s[Kubernetes Cluster<br/>(k3s)]
+    Git --> Argo[Argo CD (GitOps)]
+    Argo --> K8s[Kubernetes Cluster (k3s)]
 
     K8s --> App[Application Workloads]
     K8s --> Obs[Observability Stack]
