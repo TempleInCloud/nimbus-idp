@@ -108,6 +108,20 @@ This confirms:
 
 ---
 
+## Traffic Flow (Demo App)
+
+This demo app is deployed via GitOps and exposed through Traefik Ingress.
+
+**Flow:**
+GitHub (manifests) → Argo CD (sync) → Kubernetes (Deploy/Service/Ingress) → Traefik (routes traffic) → demo-app pods
+
+**What this proves:**
+- GitOps is working (Argo CD syncs cluster state from Git)
+- The app is reachable through an Ingress route (Traefik)
+- Core K8s objects (Deployment/Service/Ingress) are managed declaratively
+
+---
+
 ## Future Improvements
 
 - Service catalog
