@@ -1,32 +1,39 @@
-# Nimbus — Internal Developer Platform (IDP)
+# Nimbus IDP
 
-Nimbus is a Kubernetes-based Internal Developer Platform designed to provide
-a simple, opinionated "golden path" for deploying and operating applications
-using GitOps principles.
+Nimbus is a lightweight **Internal Developer Platform (IDP)** built on Kubernetes and GitOps.  
+It brings deployments, observability, and service discovery into a single, opinionated platform.
+
+Nimbus does **not** replace existing tools.  
+It connects and standardizes them.
 
 ---
 
-## Goals (Nimbus v1)
+## What Nimbus Is
 
-- Self-service application deployment (API or web)
-- Standard CI/CD pipeline
-- GitOps-based delivery
-- Basic observability and logging
-- Simple service catalog (planned)
+Nimbus provides:
+- A **GitOps-based delivery platform**
+- A **read-only Service Catalog** for visibility
+- **Built-in observability** using Prometheus & Grafana
+- A **single operational flow** for developers and platform teams
+
+Nimbus is designed to scale from:
+- Local / single-node k3s
+- To managed Kubernetes (EKS, GKE, AKS)
 
 ---
 
 ## Platform Principles
 
-- Kubernetes-first
-- Git as the source of truth
-- Opinionated defaults over flexibility
-- Designed to scale from single-node k3s to EKS
+- Kubernetes-first  
+- Git as the single source of truth  
+- Opinionated defaults over flexibility  
+- Visibility over abstraction  
+- No custom control planes  
 
 ---
 
-## Architecture Overview
-
+## Core Components
+D
 Nimbus is built around Kubernetes and GitOps, bringing deployment and
 observability into a single platform.
 
@@ -78,125 +85,142 @@ Nimbus is built as a lightweight Internal Developer Platform using a layered arc
   - Service metadata is stored in Git under `service-catalog/`.
   - Each service entry defines ownership, lifecycle, Git source, Kubernetes resources, and operational links.
 
----
-
-## How Nimbus Works
-
-1. Developers push application code to GitHub
-2. GitHub Actions builds images and updates manifests
-3. Argo CD detects changes and syncs them to Kubernetes
-4. Prometheus collects metrics from nodes and workloads
-5. Grafana visualizes system and cluster health
-
-Git remains the single source of truth.
-
----
-
-## Observability
-
-Nimbus provides basic observability out of the box:
-
-- Node CPU usage
-- Node memory availability
-- Disk usage
-- Kubernetes system metrics
-
-Grafana dashboards offer a Node Resource Overview for
-monitoring cluster health.
+====
+| Component | Purpose |
+|---------|--------|
+| Kubernetes (k3s) | Runtime platform |
+| Argo CD | GitOps continuous delivery |
+| GitHub Actions | CI (build & manifest updates) |
+| Prometheus | Metrics collection |
+| Grafana | Metrics visualization |
+| Traefik Ingress | Traffic routing |
+| Nimbus Service Catalog | Service discovery & visibility |
 
 ---
-## Service Catalog
+
+## High-Level Flow (Nimbus in Action)
+
+1. Developers push code to GitHub  
+2. GitHub Actions builds images and updates manifests  
+3. Argo CD detects changes and syncs to Kubernetes  
+4. Applications run on the cluster  
+5. Prometheus collects metrics  
+6. Grafana visualizes system health  
+7. Services are documented in the Nimbus Service Catalog  
+
+Git remains the **single source of truth**.
+
+---
+
+## Dashboards
+
+Nimbus exposes operational visibility through existing platform tools.  
+There is no custom dashboard logic — dashboards *are* the interface.
+
+---
+
+### Argo CD — Deployments & GitOps
+
+Argo CD provides:
+- Application sync status
+- Deployment history
+- Drift detection
+- Rollbacks
+
+**Access:**
+- URL: http://localhost:8080  
+- Navigate to **Applications**
+
+Example applications:
+- `demo-app`
+- `service-catalog`
+- `observability-stack`
+
+---
+
+### Grafana — Metrics & Observability
+
+Grafana provides visibility into:
+- Node resource usage
+- Kubernetes workloads
+- Network and pod metrics
+
+**Access:**
+- URL: http://localhost:3000  
+- Data source: Prometheus  
+
+Recommended dashboards:
+- Node Resource Overview  
+- Kubernetes / Workload  
+- Kubernetes / Networking / Pod  
+
+---
+
+### Prometheus — Metrics Backend
+
+Prometheus is used strictly for metrics collection.
+
+**Access (optional):**
+- URL: http://localhost:9090  
+
+Prometheus is **not intended for direct developer usage**.
+
+---
+
+## Nimbus Service Catalog
 
 ![image alt](https://github.com/TempleInCloud/nimbus-idp/blob/0df0fc136462ae28ff16586100f203276fbb5ab7/docs/images/service-catalog.png)
 
 Nimbus includes a lightweight **Service Catalog** that provides a single place to discover services running on the platform.
 
-The catalog is:
-- **Git-backed** (YAML as the source of truth)
-- **Auto-updated via GitOps**
-- **Read-only for developers**
-- **Focused on visibility, not provisioning**
+The Service Catalog is:
+- Git-backed (YAML as the source of truth)
+- Auto-updated via GitOps
+- Read-only for developers
+- Focused on visibility, not provisioning
 
-Each service entry describes:
-- Ownership and lifecycle
-- Kubernetes namespace and workloads
-- Links to Argo CD, Grafana, and Prometheus
-- Where the service is defined in Git
+### Service Catalog UI
+
+The Nimbus Service Catalog UI provides a simple, read-only view of services running on the platform, with direct links to operational tooling.
+
+![Nimbus Service Catalog](docs/images/service-catalog.png)
+
+---
 
 ### Example Services
-- `demo-app` – sample application deployed via Argo CD
-- `observability-stack` – Prometheus and Grafana used by the platform
 
-### How it works
-1. Services are defined in Git under `service-catalog/services/*/service.yaml`
-2. A simple static UI renders these definitions
-3. Links point directly to live platform tools (Argo CD, Grafana, Prometheus)
+#### demo-app
 
-The Service Catalog acts as a **discovery layer** on top of Kubernetes and GitOps.
----
+- Owner: platform-team  
+- Lifecycle: production  
+- Namespace: default  
 
-## Tech Stack (v1)
+Demo application deployed via Argo CD.
 
-- AWS EC2
-- k3s (Kubernetes)
-- Terraform
-- Argo CD (GitOps)
-- GitHub Actions (CI)
-- Prometheus
-- Grafana
-- Traefik Ingress (default with k3s)
+Links:
+- Argo CD App  
+- Grafana  
+- Prometheus  
 
 ---
 
-## Demo App Deployment (Validation)
+#### observability-stack
 
-- Deployed `demo-app` using **Argo CD** following GitOps principles
-- Kubernetes **Service** created to expose the application internally
-- Application reachability validated using `kubectl port-forward`
-- Successfully accessed the running application via browser (nginx welcome page)
+- Owner: platform-team  
+- Lifecycle: production  
+- Namespace: observability  
 
-This confirms:
-- Argo CD is syncing application manifests correctly
-- Kubernetes networking (Service → Pod) is working as expected
-- The platform can deploy and expose workloads reliably
+Prometheus and Grafana stack used for Nimbus observability.
 
----
-
-## Traffic Flow (Demo App)
-
-This demo app is deployed via GitOps and exposed through Traefik Ingress.
-
-**Flow:**
-GitHub (manifests) → Argo CD (sync) → Kubernetes (Deploy/Service/Ingress) → Traefik (routes traffic) → demo-app pods
-
-**What this proves:**
-- GitOps is working (Argo CD syncs cluster state from Git)
-- The app is reachable through an Ingress route (Traefik)
-- Core K8s objects (Deployment/Service/Ingress) are managed declaratively
+Links:
+- Grafana  
+- Prometheus  
 
 ---
 
-## Future Improvements
+### Source of Truth
 
-- Application templates
-- Environment promotion workflows
-- Alerting and SLOs
-- Optional developer portal UI
+All services are defined in:
 
----
-
-## Screenshots
-
-Screenshots are stored in `docs/screenshots/`.
-
-- Argo CD Applications (Synced/Healthy)
-- demo-app Argo CD resource graph (Ingress → Service → Pods)
-- Grafana dashboards (Node + Kubernetes/Pod networking)
-- Prometheus targets (exporters UP)
-- demo-app working in browser (nginx page)
----
-
-## Author
-
-Built by Temple Osaroejiji  
-Cloud / DevOps / Platform Engineering
+```text
+service-catalog/services/*/service.yaml
